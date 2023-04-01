@@ -1,15 +1,25 @@
 {
-    "name": "my-project",
-    "version": "1.0.0",
-    "description": "My Project",
-    "main": "app.js",
-    "scripts": {
-        "start": "node app.js"
-    },
-    "author": "TT",
-    "license": "ISC",
-    "dependencies": {
-        "express": "^4.18.2",
-        "ytdl-core": "^4.9.1"
-    }
+  "name": "my-project",
+  "version": "1.1.0",
+  "description": "My Project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "TT",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ytdl-core": "^4.11.3",
+    "qrcode-terminal": "^0.12.0",
+    "node-qrcode": "^1.4.4"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "keywords": [
+    "qr",
+    "authentication",
+    "security"
+  ]
 }

@@ -1,20 +1,36 @@
 const express = require('express');
 const ytdl = require('ytdl-core');
-const path = require('path');
-
 const app = express();
+const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+let qrCodeRead = false;
+
+app.use(express.static('public'));
+
+app.get('/play', async (req, res) => {
+  if (!qrCodeRead) {
+    res.redirect('https://www.youtube.com');
+    return;
+  }
+
+  const url = req.query.url;
+  const stream = ytdl(url, { filter: 'audioonly' });
+
+  res.setHeader('Content-Type', 'audio/mpeg');
+  res.setHeader('Transfer-Encoding', 'chunked');
+  stream.pipe(res);
 });
 
-app.get('/stream', async(req, res) => {
-    const videoUrl = req.query.videoUrl;
-    const audioStream = ytdl(videoUrl, {filter: 'audioonly'});
-
-    audioStream.pipe(res);
+app.get('/qr', (req, res) => {
+  qrCodeRead = true;
+  res.send('QR code read!');
 });
 
-app.listen(process.env.PORT || 8080, () => {
-    console.log(`Server listening on port ${process.env.PORT || 8080}`);
-})
+// Start a timer to reset the QR code read status after 30 seconds
+setInterval(() => {
+  qrCodeRead = false;
+}, 30000);
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
