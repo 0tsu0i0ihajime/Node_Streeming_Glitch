@@ -1,6 +1,15 @@
 {
+    "name": "my-project",
+    "version": "1.0.0",
+    "description": "My Project",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "author": "TT",
+    "license": "ISC",
     "dependencies": {
-        "express": "^4.17.1",
-        "ytdl-core": "^4.2.0"
+        "express": "^4.18.2",
+        "ytdl-core": "^4.9.1"
     }
 }
